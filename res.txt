@@ -1,2 +1,18 @@
-epoch_num: 1, lr: 0.001, batch_size: 1, eval_acc: 0.7598
-epoch_num: 2, lr: 0.0001, batch_size: 4, eval_acc: 0.6944
+first run:
+'epoch': 1.0, lr:2e-5, batch_size:16, 'eval_accuracy': 0.8333333333333334
+'epoch': 2.0,  lr:2e-5, batch_size:16, 'eval_accuracy': 0.8480392156862745
+'epoch': 3.0,  lr:2e-5, batch_size:16, 'eval_accuracy': 0.8504901960784313 
+
+second run:
+'epoch': 1.0, lr:2e-5, batch_size:16, 'eval_accuracy': 0.8112745098039216
+'epoch': 2.0,  lr:2e-5, batch_size:16, 'eval_accuracy': 0.8308823529411765
+'epoch': 3.0,  lr:2e-5, batch_size:16, 'eval_accuracy': 0.8578431372549019 
+'epoch': 4.0, lr:2e-5, batch_size:16, 'eval_accuracy': 0.8578431372549019
+'epoch': 5.0,  lr:2e-5, batch_size:16, 'eval_accuracy': 0.8480392156862745
+
+third run:
+'epoch': 1.0, lr:5e-5, batch_size:32, 'eval_accuracy': 0.8137254901960784
+'epoch': 2.0,  lr:5e-5, batch_size:32, 'eval_accuracy': 0.8455882352941176
+'epoch': 3.0,  lr:5e-5, batch_size:32, 'eval_accuracy': 0.8406862745098039
+'epoch': 4.0, lr:5e-5, batch_size:32, 'eval_accuracy': 0.8455882352941176
+'epoch': 5.0,  lr:5e-5, batch_size:32, 'eval_accuracy': 0.8406862745098039
