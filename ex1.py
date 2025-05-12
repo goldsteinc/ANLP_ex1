@@ -52,9 +52,15 @@ def main():
     # model = BertForSequenceClassification.from_pretrained(args.model_path, num_labels=2)
 
     dataset_tokenized = dataset.map(tokenize_function, batched=True, batch_size=len(dataset))
-    train_dataset = dataset_tokenized['train']
-    validation_dataset = dataset_tokenized['validation']
-    test_dataset = dataset_tokenized['test']
+
+    if args.max_train_samples != -1:
+        dataset_tokenized["train"] = dataset_tokenized["train"].select(range(args.max_train_samples))
+    if args.max_eval_samples != -1:
+        dataset_tokenized["validation"] = dataset_tokenized["validation"].select(range(args.max_eval_samples))
+    if args.max_predict_samples != -1:
+        dataset_tokenized["test"] = dataset_tokenized["test"].select(range(args.max_predict_samples))
+
+
 
     metric = load("accuracy")
 
@@ -75,8 +81,8 @@ def main():
     trainer = Trainer(
         model=model,
         args=training_args,
-        train_dataset=train_dataset,
-        eval_dataset=validation_dataset,
+        train_dataset=dataset_tokenized["train"],
+        eval_dataset=dataset_tokenized["validation"],
         tokenizer=tokenizer,
         compute_metrics=compute_metrics
     )
@@ -92,7 +98,7 @@ def main():
     if args.do_predict:
         model.eval()
         model.to(training_args.device)
-        predictions = trainer.predict(test_dataset)
+        predictions = trainer.predict(dataset_tokenized["test"])
         preds = np.argmax(predictions.predictions, axis=1)
         with open("predictions.txt", "w") as f:
             for pred in preds:
